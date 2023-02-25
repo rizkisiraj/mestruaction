@@ -1,6 +1,6 @@
 const Container = () => {
   return (
-    <div className="w-12 h-12 bg-blue-300">
+    <div className="mx-auto w-full max-w-sm bg-red-500">
       
     </div>
   )
