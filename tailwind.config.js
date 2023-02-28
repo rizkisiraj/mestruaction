@@ -4,7 +4,11 @@ module.exports = {
   purge: ["./src/**/*.{html,js,jsx}"],
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        'card':  '0px 2px 30px 5px rgba(0, 0, 0, 0.09)'
+      }
+    },
   },
   plugins: [],
 }
