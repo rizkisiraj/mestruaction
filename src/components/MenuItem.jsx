@@ -3,7 +3,12 @@ import {FaUserFriends} from 'react-icons/fa'
 import {FaHandPaper} from 'react-icons/fa'
 import {HiClipboard} from 'react-icons/hi'
 
+import { useNavigate } from "react-router-dom";
+
 function Menu(){
+    
+    const navigate = useNavigate()
+
     return(
         <div className="h-[77px] w-full text-[11px] font-medium flex space-x-3 my-6 mx-auto">
             <div className="block w-[77px] text-center">
@@ -14,7 +19,8 @@ function Menu(){
             </div>
 
             <div className="block w-[77px] text-center">
-                <button className="h-[50px] w-[50px] rounded-full bg-[#E9FFFC] mx-auto flex mb-2">
+                <button className="h-[50px] w-[50px] rounded-full bg-[#E9FFFC] mx-auto flex mb-2"
+                    onClick={() => navigate('kolaborasi/')}>
                     <FaUserFriends size={25} className=' m-auto' style={{ color: '#259F46' }} />
                 </button>
                 <span className=''>Kolaborasi</span>
@@ -28,7 +34,8 @@ function Menu(){
             </div>
 
             <div className="block w-[77px] text-center">
-                <button className="h-[50px] w-[50px] rounded-full bg-[#FFDFE3] mx-auto flex mb-2">
+                <button className="h-[50px] w-[50px] rounded-full bg-[#FFDFE3] mx-auto flex mb-2"
+                    onClick={() => navigate('edukasi/')}>
                     <HiClipboard size={25} className=' m-auto' style={{ color: '#E4141D' }} />
                 </button>
                 <span className=''>Edukasi</span>

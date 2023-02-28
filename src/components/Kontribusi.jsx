@@ -6,7 +6,7 @@ function Kontribusi() {
         <div className='w-full h-auto my-12'>
             <div className="flex justify-between font-semibold items-center mb-5">
                 <h2 className="text-[16px]">Kontribusi #TemanAksi</h2>
-                <a className="text-[12px] text-[#F64A4A]" href='#'>Lihat lebih</a>
+                <a className="text-[12px] text-[#F64A4A]" href='/home/kontribusi/'>Lihat lebih</a>
             </div>
 
             <div className="w-full h-[264px] flex justify-between">

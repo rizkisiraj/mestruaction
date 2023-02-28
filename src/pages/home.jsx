@@ -4,7 +4,7 @@ import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx'
 import Kontribusi from '../components/Kontribusi.jsx'
 
 import Logo from '../assets/logomenstru.png'
-import cardDonasi from '../assets/cardDonasi.png'
+// import cardDonasi from '../assets/cardDonasi.png'
 import map from '../assets/map.png'
 
 
@@ -24,7 +24,8 @@ function Home() {
             </div>
 
             {/* CardDonasi */}
-            <div className='w-full h-[168px] bg-[#FE6A70] rounded-xl px-[18px] py-[21px] text-white relative'>
+            <div className="w-full h-[168px] bg-[#FE6A70] rounded-xl px-[18px] py-[21px] text-white relative">
+                <div className="absolute inset-0 bg-[url('./assets/cardDonasi.png')] bg-cover rounded-xl"></div>
                 <div className='text-[18px] font-semibold'>
                     Bantu perempuan-perempuan
                     Indonesia dapatkan <span className='font-bold'>menstruasi yang layak</span>
