@@ -16,7 +16,7 @@ function Kontribusi() {
                         <h2>
                             <span className='text-[#E4141D]'> #TemanAksi</span>
                             <br />
-                            mendistribusikan Produk Menstruasi ke Alor, NTT.
+                            Pendistribusian Produk Menstruasi ke Panti Asuhan Kasih Mutiara
                         </h2>
                     </div>
                 </div>
@@ -27,7 +27,7 @@ function Kontribusi() {
                         <h2>
                             <span className='text-[#E4141D]'> #TemanAksi</span>
                             <br />
-                            Mengkampanyekan Pentingnya Menjaga Kebersihan Saat Masa Menstruasi
+                            Penyuluhan Pentingnya Menjaga Kebersihan Saat Masa Menstruasi di SMPN Mekarsari
                         </h2>
                     </div>
                 </div>
