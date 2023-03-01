@@ -2,13 +2,22 @@ import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import BackgroundDonasi from '../assets/background-donasi.webp';
 import IconCreator from '../assets/icon-creator.svg';
-import Donations from '../dumpData';
-import { getAmountOfDonors, getDonation } from '../utils/firebase';
+import { getDonors, getDonation } from '../utils/firebase';
 
 const convertToRupiah = (number) => {
   return 'Rp' + new Intl.NumberFormat("id-ID", {
     currency: "IDR"
   }).format(number);
+};
+
+const convertSnapshotToArray = (snapshot) => {
+  const arrayDump = [];
+
+  snapshot.forEach(snap => {
+    arrayDump.push(snap.data());
+  })
+
+  return arrayDump;
 }
 
 const Donasi = () => {
@@ -16,13 +25,17 @@ const Donasi = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({});
   const [donorsCount, setDonorsCount] = useState(0);
+  const [donors, setDonors] = useState([]);
   
   useEffect(() => {
     const getData = async () => {
       const dataTemp = await getDonation(id);
-      const donorsCountTemp = await getAmountOfDonors(id);
+      let donorsDump = await getDonors(id);
       setData(dataTemp);
-      setDonorsCount(donorsCountTemp);
+      setDonorsCount(donorsDump.size);
+  
+      donorsDump = convertSnapshotToArray(donorsDump);
+      setDonors(donorsDump);
     }
 
     getData();
@@ -31,7 +44,6 @@ const Donasi = () => {
   const progressLength = (progressFund, targetFund) => {
     let length = (progressFund / targetFund) * 100;
     length = length.toFixed(2);
-    console.log(length);
     return length;
   } 
 
@@ -66,7 +78,12 @@ const Donasi = () => {
         )
        })}
       </div>
-        <Outlet context={data.description && data.description} />
+        <Outlet context={
+          {
+            description: data.description && data.description,
+            donors: donors && donors,
+            progressFund: data.progressFund && data.progressFund
+          }} />
       </section>
     </main>
     </>
