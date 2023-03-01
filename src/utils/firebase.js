@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { collection, doc, getCountFromServer, getDoc, getFirestore } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,3 +20,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+const db = getFirestore(app);
+
+export const getDonation = async (id) => {
+  const docRef = doc(db, 'donations', '36SE08AW4A9pP03wgWaQ');
+  const docSnap = await getDoc(docRef);
+
+  if(docSnap.exists()) {
+    return docSnap.data();
+  }
+}
+
+export const getAmountOfDonors = async (id) => {
+  const donorsCollection = collection(db, 'donations', '36SE08AW4A9pP03wgWaQ', 'donors');
+  const snapshot = await getCountFromServer(donorsCollection);
+  return snapshot.data().count;
+}

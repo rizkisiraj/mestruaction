@@ -24,11 +24,11 @@ function App() {
         </Route>
         <Route path='donasi/:id/form-donasi' element={<FormDonasi />} />
         <Route path='sudah-donasi' element={<SudahDonasi />} />
-        <Route path='home/' element={<Home />} /> 
-        <Route path='home/edukasi/' element={<Edukasi />} /> 
-        <Route path='home/edukasi/artikel/' element={<Artikel />} /> 
-        <Route path='home/kolaborasi/' element={<Kolaborasi />} /> 
-        <Route path='home/kontribusi/' element={<Kontribusi />} /> 
+        <Route index element={<Home />} /> 
+        <Route path='edukasi/' element={<Edukasi />} /> 
+        <Route path='edukasi/artikel/' element={<Artikel />} /> 
+        <Route path='kolaborasi/' element={<Kolaborasi />} /> 
+        <Route path='kontribusi/' element={<Kontribusi />} /> 
       </Route>
     </Routes>
   );
