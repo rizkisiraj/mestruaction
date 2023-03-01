@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 
-import Event from '../assets/event.png'
+import Event from '../assets/event.webp'
 
 function UpcomingEvent() {
     return (

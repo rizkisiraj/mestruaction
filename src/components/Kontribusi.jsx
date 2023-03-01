@@ -1,5 +1,5 @@
-import img1 from '../assets/kontribusi1.png'
-import img2 from '../assets/kontribusi2.png'
+import img1 from '../assets/kontribusi1.webp'
+import img2 from '../assets/kontribusi2.webp'
 
 function Kontribusi() {
     return (
