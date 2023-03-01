@@ -1,13 +1,10 @@
-import MenuItem from '../components/MenuItem.jsx'
-import Event from '../components/UpcomingEvent.jsx'
-import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx'
-import Kontribusi from '../components/Kontribusi.jsx'
+import MenuItem from '../components/MenuItem.jsx';
+import Event from '../components/UpcomingEvent.jsx';
+import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx';
+import Kontribusi from '../components/Kontribusi.jsx';
 
-import Logo from '../assets/logomenstru.svg'
-// import cardDonasi from '../assets/cardDonasi.png'
-import map from '../assets/map.webp'
-
-
+import Logo from '../assets/logomenstru.svg';
+import map from '../assets/map.webp';
 
 import { FaSearch } from 'react-icons/fa'
 

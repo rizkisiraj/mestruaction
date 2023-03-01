@@ -1,5 +1,4 @@
 import dumpDonaturs from "../dumpDonatur";
-import Avatar from "../assets/avatar.svg";
 import DonaturCard from "./DonaturCard";
 
 const convertToRupiah = (number) => {

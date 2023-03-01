@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import BackgroundDonasi from '../assets/background-donasi.webp';
 import IconCreator from '../assets/icon-creator.svg';
 import Donations from '../dumpData';
+import { getAmountOfDonors, getDonation } from '../utils/firebase';
 
 const convertToRupiah = (number) => {
   return 'Rp' + new Intl.NumberFormat("id-ID", {
@@ -13,9 +14,18 @@ const convertToRupiah = (number) => {
 const Donasi = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [data, setData] = useState({});
+  const [donorsCount, setDonorsCount] = useState(0);
   
   useEffect(() => {
+    const getData = async () => {
+      const dataTemp = await getDonation(id);
+      const donorsCountTemp = await getAmountOfDonors(id);
+      setData(dataTemp);
+      setDonorsCount(donorsCountTemp);
+    }
 
+    getData();
   },[id])
 
   const progressLength = (progressFund, targetFund) => {
@@ -30,20 +40,20 @@ const Donasi = () => {
     <img height={224} src={BackgroundDonasi} className="block w-full" alt="background donasi" />
     <main className='px-8 pt-5'>
       <section>
-        <h1 className='text-sm font-bold mb-3'>{Donations[0].title}</h1>
+        <h1 className='text-sm font-bold mb-3'>{data.title && data.title}</h1>
         <div className='flex items-center gap-2 mb-5'>
           <span>
             <img src={IconCreator} alt="person icon" />
           </span>
-          <p className='font-semibold text-xs text-red-500'>{Donations[0].creator}</p>
+          <p className='font-semibold text-xs text-red-500'>{data.initiator && data.initiator}</p>
         </div>
-          <p className='font-bold text-blue-500 text-xl'>{convertToRupiah(Donations[0].progressFund)}</p>
+          <p className='font-bold text-blue-500 text-xl'>{data.progressFund && convertToRupiah(data.progressFund)}</p>
           <div className='flex justify-between mb-2'>
-            <p className='text-xs'>terkumpul dari <strong>{convertToRupiah(Donations[0].targetFund)}</strong></p>
-            <p className='text-xs font-semibold text-blue-500'>{Donations[0].donorsCount} Donatur</p>
+            <p className='text-xs'>terkumpul dari <strong>{data.targetFund && convertToRupiah(data.targetFund)}</strong></p>
+            <p className='text-xs font-semibold text-blue-500'>{donorsCount} Donatur</p>
           </div>
           <div className='mb-3 relative w-full h-2 bg-slate-300 rounded-lg overflow-hidden'>
-            <div style={{width: `${progressLength(Donations[0].progressFund, Donations[0].targetFund)}%`}} className='absolute w-full top-0 left-0 bg-red-500 h-2 rounded-lg overflow-hidden'></div>
+            <div style={{width: `${(data.progressFund & data.targetFund) ? progressLength(data.progressFund, data.targetFund) : 0}%`}} className='absolute w-full top-0 left-0 bg-red-500 h-2 rounded-lg overflow-hidden'></div>
           </div>
           <button onClick={() => navigate(`/donasi/${id}/form-donasi`)} className='block text-center w-full bg-red-500 font-semibold rounded-[5px] py-3 text-white mb-10' aria-label='tombol donasi sekarang'>DONASIKAN SEKARANG</button>
         <p></p>
@@ -56,7 +66,7 @@ const Donasi = () => {
         )
        })}
       </div>
-        <Outlet context={Donations[0].description} />
+        <Outlet context={data.description && data.description} />
       </section>
     </main>
     </>
