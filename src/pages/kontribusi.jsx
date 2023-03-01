@@ -1,6 +1,6 @@
 import { MdArrowBackIos } from 'react-icons/md'
 
-import img1 from '../assets/kontribusi1.png'
+import img1 from '../assets/kontribusi1.webp'
 
 
 function Kontribusi() {

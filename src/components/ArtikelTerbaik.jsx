@@ -1,5 +1,5 @@
 
-import art from '../assets/art.png'
+import art from '../assets/art.webp'
 
 import { useNavigate } from "react-router-dom";
 

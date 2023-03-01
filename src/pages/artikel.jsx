@@ -4,7 +4,7 @@ import { BsFillCaretRightFill } from 'react-icons/bs'
 import { HiOutlineCalendar } from 'react-icons/hi'
 import { RiUserHeartLine } from 'react-icons/ri'
 
-import art from '../assets/art.png'
+import art from '../assets/art.webp'
 
 function Artikel() {
     return (

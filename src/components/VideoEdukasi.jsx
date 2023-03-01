@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import SampleVid from '../assets/video.png'
+import SampleVid from '../assets/video.webp'
 
 import {BsFillCaretRightFill} from 'react-icons/bs'
 

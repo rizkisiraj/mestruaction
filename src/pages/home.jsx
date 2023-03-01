@@ -3,9 +3,9 @@ import Event from '../components/UpcomingEvent.jsx'
 import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx'
 import Kontribusi from '../components/Kontribusi.jsx'
 
-import Logo from '../assets/logomenstru.png'
+import Logo from '../assets/logomenstru.svg'
 // import cardDonasi from '../assets/cardDonasi.png'
-import map from '../assets/map.png'
+import map from '../assets/map.webp'
 
 
 
@@ -27,7 +27,7 @@ function Home() {
 
                 {/* CardDonasi */}
                 <div className="w-full h-[168px] bg-[#FE6A70] rounded-xl px-[18px] py-[21px] text-white relative">
-                    <div className="absolute inset-0 bg-[url('./assets/cardDonasi.png')] bg-cover rounded-xl"></div>
+                    <div className="absolute inset-0 bg-[url('./assets/cardDonasi.webp')] bg-cover rounded-xl"></div>
                     <div className='text-[18px] font-semibold'>
                         Bantu perempuan-perempuan
                         Indonesia dapatkan <span className='font-bold'>produk menstruasi yang layak</span>
