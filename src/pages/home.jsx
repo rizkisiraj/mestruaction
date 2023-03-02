@@ -3,10 +3,11 @@ import Event from '../components/UpcomingEvent.jsx';
 import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx';
 import Kontribusi from '../components/Kontribusi.jsx';
 
-import Logo from '../assets/logomenstru.svg';
+import Logo from '../assets/logomenstru.webp';
 import map from '../assets/map.webp';
-
 import { FaSearch } from 'react-icons/fa'
+
+import { Link} from "react-router-dom";
 
 function Home() {
     return (
@@ -16,10 +17,14 @@ function Home() {
                 {/* search */}
                 <div className=' h-10 w-full flex items-center space-x-[25px] mb-7'>
                     <img src={Logo} alt="" className=' w-[49px] h-[33px]' />
-                    <div className='h-full w-full border-[2px] border-gray-400 rounded-md flex items-center space-x-[8px] px-3'>
+                    <form className='h-full w-full border-[2px] border-gray-400 rounded-md flex items-center space-x-[8px] px-3'>
                         <FaSearch size={15} style={{ color: 'gray' }} />
-                        <span className='text-gray-400 font-semibold text-[12px]'>Cari disini</span>
-                    </div>
+                        <input className='text-gray-400 font-semibold text-[12px] focus:outline-none'
+                            type="text"
+                            placeholder='Cari disini'
+                            name=''>
+                        </input>
+                    </form>
                 </div>
 
                 {/* CardDonasi */}
@@ -29,7 +34,9 @@ function Home() {
                         Bantu perempuan-perempuan
                         Indonesia dapatkan <span className='font-bold'>produk menstruasi yang layak</span>
                     </div>
-                    <button className='w-[134px] h-[40px] bg-white text-[#9B1C1C] font-bold text-[12px] rounded-md mt-2 absolute right-5'>DONASI SEKARANG</button>
+                    <Link className='w-[134px] h-[40px] bg-white text-[#9B1C1C] font-bold text-[12px] rounded-md mt-2 absolute right-5 flex'
+                        to = '/donasi/Rccw3Wzaqea64Nh4Uzqp/form-donasi'
+                        > <span className='m-auto'>DONASI SEKARANG</span></Link>
                 </div>
                 <MenuItem />
             </div>

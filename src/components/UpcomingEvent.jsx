@@ -14,8 +14,6 @@ function UpcomingEvent() {
                 <Swiper
                     spaceBetween={15}
                     slidesPerView={1.2}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
                 >
                     <SwiperSlide className='bg-white rounded-lg border-gray-300 border-[0.5px]'>
                         <div className='w-full h-[126px]'>

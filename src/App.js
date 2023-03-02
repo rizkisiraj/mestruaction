@@ -11,6 +11,7 @@ import Home from './pages/home';
 import Edukasi from './pages/edukasi';
 import Artikel from './pages/artikel'
 import Kolaborasi from './pages/kolaborasi'
+import SudahKolaborasi from './pages/sudahKolaborasi';
 import Kontribusi from './pages/kontribusi'
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
         <Route index element={<Home />} /> 
         <Route path='edukasi/' element={<Edukasi />} /> 
         <Route path='edukasi/artikel/' element={<Artikel />} /> 
-        <Route path='kolaborasi/' element={<Kolaborasi />} /> 
+        <Route path='kolaborasi/' element={<Kolaborasi />} />
+        <Route path='sudah-kolaborasi' element={<SudahKolaborasi />} /> 
         <Route path='kontribusi/' element={<Kontribusi />} /> 
       </Route>
     </Routes>

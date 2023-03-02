@@ -14,9 +14,9 @@ function Artikel() {
                 <div className="h-[114px] w-full rounded-xl bg-[#FFF9FA] border-[1px] border-[#FE6A705E] flex p-4 justify-between "
                     onClick={() => navigate('artikel/')}>
                     <div className=" w-44 h-full">
-                        <h3 className="text-[14px] font-semibold">Apa itu kemiskinan menstruasi?</h3>
+                        <h3 className="text-[14px] font-semibold">Yuk, Pahami Manajemen Kebersihan Menstruasi!</h3>
                         <div className='font-medium text-[#898989] text-xs flex justify-between mt-4'>
-                            <p>Naela Fauzul</p>
+                            <p>Zahwa Almira</p>
                             <p>20 Jan 2023</p>
                         </div>
                     </div>

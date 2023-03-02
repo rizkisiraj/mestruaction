@@ -1,14 +1,15 @@
 import Kontribusi from '../components/Kontribusi.jsx'
 
 import { MdArrowBackIos } from 'react-icons/md'
-import map from '../assets/map.png'
+import map from '../assets/map.webp'
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { useNavigate } from 'react-router';
 
 
 function Kolaborasi() {
-
+    const navigate = useNavigate()
     const form = useRef();
 
     const sendEmail = (e) => {
@@ -16,17 +17,18 @@ function Kolaborasi() {
 
         emailjs.sendForm('service_hz5rcvd', 'template_hz72ewa', form.current, 'o7Y8zgv7ySiCgASwH')
             .then((result) => {
-                console.log(result.text);
             }, (error) => {
                 console.log(error.text);
             });
-        e.target.reset()
+        e.target.reset();
+        navigate('../sudah-kolaborasi')
     };
 
     return (
         <div className="py-10 bg-white">
             {/* back */}
-            <div className=' h-10 w-full flex items-center space-x-[16px] mb-7 pr-6 pl-3'>
+            <div className=' h-10 w-full flex items-center space-x-[16px] mb-7 pr-6 pl-3'
+                onClick={() => navigate('../')}>
                 <MdArrowBackIos size={30} />
             </div>
 
@@ -55,23 +57,25 @@ function Kolaborasi() {
                     <h2 className=' text-base font-semibold'>Tertarik menjadi bagian dari #TemanAksi!? Hubungi Kami!</h2>
                     <form className='block w-full space-y-4 text-sm font-normal mt-3'
                         ref={form} onSubmit={sendEmail}>
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-[#FE6A70]'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
                             type="text"
                             placeholder='Nama'
                             name='user_name'
                              required />
 
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-[#FE6A70]'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
                             type="email" 
                             name="user_email" id=""
                             placeholder='Email' required />
 
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-[#FE6A70]'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
                             type="tel" 
-                            name="user_phone" id=""
+                            name="user_phone"
+                            pattern="[0-9]{8,15}" id=""
+                            title="Number only, 8-15 characters"
                             placeholder='No. Telp' required />
 
-                        <textarea className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-[#FE6A70]'
+                        <textarea className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
                             name="message" id=""
                             placeholder='Bentuk kolaborasi yang diinginkan'
                             rows="3" required>
