@@ -229,7 +229,7 @@ lebih banyak orang.</p>
       </section>
       </form>
     </main>
-    <Modal isOpen={isOpen} watch={watch} setValues={setValue} setIsOpen={setIsOpen} />
+    <Modal isOpen={isOpen} watch={watch} setValues={setValue} setIsOpen={setIsOpen} rekening={donation.rekeningBank && donation.rekeningBank} uangDigital={donation.uangDigital && donation.uangDigital} namaAkun={donation.namaAkun && donation.namaAkun} />
     </>
   )
 }

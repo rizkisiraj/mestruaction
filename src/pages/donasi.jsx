@@ -82,7 +82,6 @@ const Donasi = () => {
           {
             description: data.description && data.description,
             donors: donors && donors,
-            progressFund: data.progressFund && data.progressFund
           }} />
       </section>
     </main>
