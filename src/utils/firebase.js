@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { collection, doc, getCountFromServer, getDoc, getFirestore } from 'firebase/firestore'
+import { collection, doc, query, getDoc, getDocs, getFirestore, addDoc, Timestamp, updateDoc } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,7 +24,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 export const getDonation = async (id) => {
-  const docRef = doc(db, 'donations', '36SE08AW4A9pP03wgWaQ');
+  const docRef = doc(db, 'donations', id);
   const docSnap = await getDoc(docRef);
 
   if(docSnap.exists()) {
@@ -32,8 +32,33 @@ export const getDonation = async (id) => {
   }
 }
 
-export const getAmountOfDonors = async (id) => {
-  const donorsCollection = collection(db, 'donations', '36SE08AW4A9pP03wgWaQ', 'donors');
-  const snapshot = await getCountFromServer(donorsCollection);
-  return snapshot.data().count;
+export const getDonors = async (id) => {
+  const donorsCollection = query(collection(db, 'donations', id, 'donors'));
+  const snapshot = await getDocs(donorsCollection);
+  return snapshot;
+}
+
+export const addDonor = async (id, donor, donasiUpdate) => {
+  try {
+      await addDoc(collection(db,'donations',id,'donors'), {
+      ...donor,
+      created_at: Timestamp.now(),
+    });
+
+    await updateTotalDonation(id, donasiUpdate);
+
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export const updateTotalDonation = async (id, totalDonation) => {
+  const docRef = doc(db, 'donations', id);
+  try {
+    await updateDoc(docRef, {
+      progressFund : totalDonation,
+    })
+  } catch(e) {
+    console.log(e);
+  }
 }

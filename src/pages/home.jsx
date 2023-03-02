@@ -2,14 +2,14 @@ import MenuItem from '../components/MenuItem.jsx';
 import Event from '../components/UpcomingEvent.jsx';
 import ArtikelTerbaru from '../components/ArtikelTerbaru.jsx';
 import Kontribusi from '../components/Kontribusi.jsx';
-
 import Logo from '../assets/logomenstru.webp';
-import map from '../assets/map.webp';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import { FaSearch } from 'react-icons/fa'
 
 import { Link} from "react-router-dom";
 
 function Home() {
+
     return (
         <div className="pt-10 bg-white">
 
@@ -48,11 +48,19 @@ function Home() {
                 <Kontribusi />
 
                 {/* maps */}
-                <div className='w-full h-[250px]'>
+                <div className='w-full pb-4 rounded-md'>
                     <h2 className='text-[16px] font-semibold mb-[16px]'>Sebaran #TemanAksi di Indonesia</h2>
-                    <div className='w-full h-[177px] rounded-md'>
-                        <img src={map} alt="" className='h-full w-full object-cover' />
-                    </div>
+                    <MapContainer className='w-full h-[250px] rounded-md' center={[-7.6878285, 110.4132472]} zoom={14} scrollWheelZoom={false}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[-7.6878285, 110.4132472]}>
+                        <Popup>
+                          SRIKANDI X UII
+                        </Popup>
+                    </Marker>
+                    </MapContainer>
 
                 </div>
             </div>
