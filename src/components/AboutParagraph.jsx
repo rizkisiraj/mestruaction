@@ -1,11 +1,11 @@
 import { useOutletContext } from "react-router-dom"
 
 const AboutParagraph = () => {
-  const content = useOutletContext();
+  const { description } = useOutletContext();
   
   return (
     <div className="pb-4">
-      <p>{content}</p>
+      <p>{description}</p>
     </div>
   )
 }

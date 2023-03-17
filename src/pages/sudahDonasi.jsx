@@ -1,7 +1,10 @@
 import Love from '../assets/love-icon.svg';
 import { HiInformationCircle } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom';
 
 const SudahDonasi = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="w-full min-h-screen flex justify-center items-center">
           <main className="relative w-[342px] shadow-card pt-[116px] px-[30px] pb-[30px]">
@@ -12,7 +15,7 @@ const SudahDonasi = () => {
                 <span><HiInformationCircle /></span>
                 <p className='text-[11px]'>Donasimu akan diverifikasi dalam 1x24 jam</p>
             </div>
-            <button onClick={() => console.log(process.env.REACT_APP_API_KEY)} className='text-center block py-3 w-full text-sm font-semibold text-white bg-[#F64A4A] rounded-[5px]'>
+            <button onClick={() => navigate('/')} className='text-center block py-3 w-full text-sm font-semibold text-white bg-[#F64A4A] rounded-[5px]'>
                 SAMA-SAMA
             </button>
           </main>

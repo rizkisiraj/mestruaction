@@ -57,25 +57,25 @@ function Kolaborasi() {
                     <h2 className=' text-base font-semibold'>Tertarik menjadi bagian dari #TemanAksi!? Hubungi Kami!</h2>
                     <form className='block w-full space-y-4 text-sm font-normal mt-3'
                         ref={form} onSubmit={sendEmail}>
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#eff1f5]  focus:outline-[#5c99ed]'
                             type="text"
                             placeholder='Nama'
                             name='user_name'
                              required />
 
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#eff1f5]  focus:outline-[#5c99ed]'
                             type="email" 
                             name="user_email" id=""
                             placeholder='Email' required />
 
-                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
+                        <input className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#eff1f5]  focus:outline-[#5c99ed]'
                             type="tel" 
                             name="user_phone"
                             pattern="[0-9]{8,15}" id=""
                             title="Number only, 8-15 characters"
                             placeholder='No. Telp' required />
 
-                        <textarea className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#FFF9FA]  focus:outline-slate-600'
+                        <textarea className='border-[1px] py-2.5 px-2.5 rounded-lg w-full border-[#D1D5DB] bg-[#F9FAFB] focus:bg-[#eff1f5]  focus:outline-[#5c99ed]'
                             name="message" id=""
                             placeholder='Bentuk kolaborasi yang diinginkan'
                             rows="3" required>

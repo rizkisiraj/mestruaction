@@ -10,7 +10,7 @@ function Menu(){
     return(
         <div className="h-[77px] w-full text-[11px] font-medium flex space-x-3 my-6 mx-auto">
             <div className="block w-[77px] text-center">
-                <Link to='/donasi/Rccw3Wzaqea64Nh4Uzqp/' className="h-[50px] w-[50px] rounded-full bg-[#E8EFFF] mx-auto flex mb-2">
+                <Link to='/donasi/36SE08AW4A9pP03wgWaQ/' className="h-[50px] w-[50px] rounded-full bg-[#E8EFFF] mx-auto flex mb-2">
                     <BsArchiveFill size={20} className=' m-auto' style={{ color: '#103374' }} />
                 </Link>
                 <span className=''>Beri Donasi</span>

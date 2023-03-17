@@ -27,7 +27,7 @@ function App() {
         <Route path='sudah-donasi' element={<SudahDonasi />} />
         <Route index element={<Home />} /> 
         <Route path='edukasi/' element={<Edukasi />} /> 
-        <Route path='edukasi/artikel/' element={<Artikel />} /> 
+        <Route path='edukasi/artikel/:id' component={Artikel} element={<Artikel />} /> 
         <Route path='kolaborasi/' element={<Kolaborasi />} />
         <Route path='sudah-kolaborasi' element={<SudahKolaborasi />} /> 
         <Route path='kontribusi/' element={<Kontribusi />} /> 

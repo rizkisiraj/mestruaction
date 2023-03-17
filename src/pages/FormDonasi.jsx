@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Donations from "../dumpData";
 import { BsPlusLg } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai"
 import { MdKeyboardArrowDown } from 'react-icons/md'
 import Modal from "../components/Modal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { addDonor, getDonation } from "../utils/firebase";
 
 const convertToRupiah = (number) => {
   return 'Rp' + new Intl.NumberFormat("id-ID", {
@@ -30,11 +31,48 @@ const HARGA_KONSTAN = {
 }
 
 const FormDonasi = () => {
-  const { register, setValue, watch, handleSubmit, resetField } = useForm();
+  const { id } = useParams();
+  const { register, setValue, watch, handleSubmit, resetField, setError, formState: { errors } } = useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const navigate = useNavigate();
-  const onSubmit = (data, e) => console.log(data, e);
+  const [donation, setDonation] = useState({});
+
+  useEffect(() => {
+    const getDataDonation = async () => {
+      const donationDump = await getDonation(id);
+      setDonation(donationDump);
+    }
+
+    getDataDonation();
+  },[id])
+
+  const onSubmit = async (data, e) => {
+    if((!data.banyakObat & !data.banyakPembalut & !data.banyakMenstrual)) {
+      alert('Jumlah donasi minimal 1 item');
+      return;
+    }
+    
+    const totalDonasi = data.banyakObat * HARGA_KONSTAN.obat + data.banyakMenstrual * HARGA_KONSTAN.menstrualCup + data.banyakPembalut * HARGA_KONSTAN.pembalut;
+    
+    const donorObj = {
+      name: data.namaDonatur ? data.namaDonatur : 'Anonymous',
+      email: data.emailDonatur ? data.emailDonatur : '',
+      totalDonation: totalDonasi,
+      pembalut: data.banyakPembalut,
+      obat: data.banyakObat,
+      menstrualCup: data.banyakMenstrual,
+      metodePembayaran: data.metodePembayaran,
+    }
+
+    if(id) {
+      await addDonor(id, donorObj, donation.progressFund+totalDonasi);
+      navigate('/sudah-donasi');
+    }
+
+
+  };
+
   const handleReduce = (fieldName) => {
     if(parseInt(watch(fieldName)) === 0) {
       return;
@@ -71,7 +109,7 @@ const FormDonasi = () => {
     <>
     <main className="pt-14 pl-6 pr-5 pb-5">
       <form onSubmit={handleSubmit(onSubmit)}>
-      <h1 className="font-semibold text-lg text-center mb-12">{Donations[0].title}</h1>
+      <h1 className="font-semibold text-lg text-center mb-12">{donation.title}</h1>
       <h2 className="font-semibold text-lg text-[#000000B2] mb-[22px]">Pilih yang akan kamu donasikan</h2>
       <section>
         <div className="flex items-center justify-between mb-4">
@@ -84,6 +122,7 @@ const FormDonasi = () => {
                 required: true,
                 pattern: /^(\+?\d+|-?0+)$/,
                 min: 0,
+                valueAsNumber: true,
               })} type="number" name="banyakPembalut" className="block mx-[6px] border border-[#FFA3B1] text-center w-[54px] h-[43px] rounded-[5px]"  />
               <button type="button" onClick={() => handleAdd('banyakPembalut')} className="pl-1 w-[29px] h-[29px] text-[#346CD7] text-xl block"><BsPlusLg /></button>
             </div>
@@ -98,6 +137,7 @@ const FormDonasi = () => {
                 required: true,
                 pattern: /^(\+?\d+|-?0+)$/,
                 min: 0,
+                valueAsNumber: true,
               })} type="number" name="banyakObat" className="block mx-[6px] border border-[#FFA3B1] text-center w-[54px] h-[43px] rounded-[5px]"  />
               <button type="button" onClick={() => handleAdd('banyakObat')} className="pl-1 w-[29px] h-[29px] text-[#346CD7] text-xl block"><BsPlusLg /></button>
             </div>
@@ -112,6 +152,7 @@ const FormDonasi = () => {
                 required: true,
                 pattern: /^(\+?\d+|-?0+)$/,
                 min: 0,
+                valueAsNumber: true,
               })} type="number" defaultValue={0} name="banyakMenstrual" className="block mx-[6px] border border-[#FFA3B1] text-center w-[54px] h-[43px] rounded-[5px]"  />
               <button type="button" onClick={() => handleAdd('banyakMenstrual')} className="pl-1 w-[29px] h-[29px] text-[#346CD7] text-xl block"><BsPlusLg /></button>
             </div>
@@ -128,16 +169,16 @@ const FormDonasi = () => {
 lebih banyak orang.</p>
         <div className="w-full relative text-2xl font-semibold rounded-[5px] overflow-hidden mb-8">
           <span className="absolute left-3 top-[14px]">Rp</span>
-          <input min={0} onKeyDown={preventMinus} defaultValue={0} {...register('totalDonasiMenstruaction')} className="block pr-3 pl-5 py-[14px] text-right bg-[#FFEBEE] w-full" type="number" name="totalDonasiMenstruaction" />
+          <input min={0} onKeyDown={preventMinus} defaultValue={0} {...register('totalDonasiMenstruaction', {valueAsNumber: true,})} className="block pr-3 pl-5 py-[14px] text-right bg-[#FFEBEE] w-full" type="number" name="totalDonasiMenstruaction" />
         </div>
       </section>
       <section>
         <div className="w-full relative font-semibold rounded-[8px] overflow-hidden text-sm bg-[#F9FAFB] border border-[#D1D5DB] mb-[14px]">
           <span className="absolute right-3 top-[14px]"><MdKeyboardArrowDown /></span>
-          <input onClick={() => setIsOpen(true)} {...register('metodePembayaran')} placeholder="Metode Pembayaran" readOnly className="focus:outline-none block p-3 bg-[#F9FAFB] overflow-hidden w-full cursor-pointer text-sm font-medium" type="text" name="metodePembayaran" />
+          <input onClick={() => setIsOpen(true)} {...register('metodePembayaran',{required: true})} placeholder="Metode Pembayaran" readOnly className="focus:outline-none block p-3 bg-[#F9FAFB] overflow-hidden w-full cursor-pointer text-sm font-medium" type="text" name="metodePembayaran" />
         </div>
-        <input {...register('namaDonatur')} disabled={isChecked} placeholder="Nama" type="text" name="namaDonatur" className="text-sm mb-[14px] block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
-        <input {...register('emailDonatur')} disabled={isChecked} placeholder="Email" type="text" name="emailDonatur" className="text-sm block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
+        <input {...register('namaDonatur',{ required: isChecked ? false : true })} disabled={isChecked} placeholder="Nama" type="text" name="namaDonatur" className="text-sm mb-[14px] block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
+        <input {...register('emailDonatur',{ required: isChecked ? false : true })} disabled={isChecked} placeholder="Email" type="text" name="emailDonatur" className="text-sm block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
         <div className="flex items-center gap-1 mt-[19px] mb-[30px]">
           <input className="inline-block" type="checkbox" id="rahasiakan" name="rahasiakan" checked={isChecked} onChange={() => {
             setChecked(!isChecked)
@@ -182,15 +223,13 @@ lebih banyak orang.</p>
           <h2 className="font-medium text-[11px] text-[#898989]">Total Donasi</h2>
           <p className="font-semibold text-xl">{convertToRupiah(returnTotalSumbanganDanDonasiMenstruaction())}</p>
         </div>
-        <button onClick={() => {
-          navigate('/sudah-donasi');
-        }} className="block min-w-[116px] text-sm text-white bg-[#F05252] py-[13px] rounded-[5px]">
+        <button type="submit" className="block min-w-[116px] text-sm text-white bg-[#F05252] py-[13px] rounded-[5px]">
         DONASI
         </button>
       </section>
       </form>
     </main>
-    <Modal isOpen={isOpen} watch={watch} setValues={setValue} setIsOpen={setIsOpen} />
+    <Modal isOpen={isOpen} watch={watch} setValues={setValue} setIsOpen={setIsOpen} rekening={donation.rekeningBank && donation.rekeningBank} uangDigital={donation.uangDigital && donation.uangDigital} namaAkun={donation.namaAkun && donation.namaAkun} />
     </>
   )
 }
