@@ -12,7 +12,6 @@ function Video() {
         <div className=" w-full h-auto my-6 pl-6">
             <div className="flex justify-between font-semibold items-center pr-6">
                 <h2 className="text-[16px] font-semibold">Video</h2>
-                <Link className="text-[12px] text-[#F64A4A]" to=''>Lihat lebih</Link>
             </div>
             <div className="h-[170px] w-full flex my-[10px]">
                 <Swiper

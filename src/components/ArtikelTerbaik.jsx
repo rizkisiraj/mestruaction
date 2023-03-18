@@ -1,9 +1,7 @@
 
-import art from '../assets/art.webp'
-
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import {getArtikel} from '../utils/firebase'
+import {getArtikel} from '../utils/firebase';
 
 
 const convertSnapshotToArray = (snapshot) => {
@@ -54,8 +52,8 @@ function Artikel() {
                                 <p>{convertTimestampToIndonesianDate(item.created_at)}</p>
                             </div>
                         </div>
-                        <div className=" w-24 h-full rounded-xl">
-                            <img src={art} alt="" className='w-full h-full object-cover rounded-xl ' />
+                        <div className=" w-24 h-[72px] rounded-xl">
+                            <img src={item.gambar} alt="" className='w-full h-full object-cover rounded-xl ' />
                         </div>
                     </div>
                  )}

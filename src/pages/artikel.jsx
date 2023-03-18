@@ -3,13 +3,11 @@ import { MdArrowBackIos } from 'react-icons/md'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 import { HiOutlineCalendar } from 'react-icons/hi'
 import { RiUserHeartLine } from 'react-icons/ri'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getContentArtikel } from '../utils/firebase'
-
-import art from '../assets/art.webp'
 
 const convertTimestampToIndonesianDate = (date) => {
     return date.toDate().toDateString('id-ID').split(' ').slice(1).join(' ');;
@@ -40,11 +38,11 @@ function Artikel() {
 
             <div className=' w-full px-6'>
                 <div className='w-full h-[184px] rounded-xl relative'>
-                    <img src={art} alt="" className='h-full w-full object-cover rounded-xl' />
+                    <img src={data.gambar} alt="" className='h-full w-full object-cover rounded-xl' />
                     <div className="absolute flex inset-0 bg-gradient-to-b  to-[#9B1C1C] via-black/10 from-transparent bg-cover rounded-xl items-end">
-                        <Link to="https://www.youtube.com/watch?v=gG8Y2-JtSD8" target="_blank">
+                        {/* <Link to="https://www.youtube.com/watch?v=gG8Y2-JtSD8" target="_blank">
                             <BsFillCaretRightFill size={40} className='absolute inset-0 text-white top-14 mx-auto' />
-                        </Link>
+                        </Link> */}
                         <h2 className='text-[12px] font-semibold text-white inset-0 px-3 mb-8 mx-auto'>{data.title}</h2>
                     </div>
                 </div>
