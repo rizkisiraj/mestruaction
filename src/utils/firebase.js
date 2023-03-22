@@ -82,3 +82,15 @@ export const getKontribusi = async () => {
   const snapshot = await getDocs(kontribusiCollection);
   return snapshot;
 }
+
+export const getVideo = async () => {
+  const videoCollection = query(collection(db, 'video'));
+  const snapshot = await getDocs(videoCollection);
+  return snapshot;
+}
+
+export const getContentVideo = async (id) => {
+  const docContent = doc(db, 'video', id);
+  const docSnap = await getDoc(docContent);
+  return docSnap.data();
+}

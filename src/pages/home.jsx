@@ -36,7 +36,7 @@ function Home() {
                         Indonesia dapatkan <span className='font-bold'>produk menstruasi yang layak</span>
                     </div>
                     <Link className='w-[134px] h-[40px] bg-white text-[#9B1C1C] font-bold text-[12px] rounded-md mt-2 absolute right-5 flex'
-                        to = '/donasi/Rccw3Wzaqea64Nh4Uzqp/form-donasi'
+                        to = '/donasi/36SE08AW4A9pP03wgWaQ/form-donasi'
                         > <span className='m-auto'>DONASI SEKARANG</span></Link>
                 </div>
                 <MenuItem />

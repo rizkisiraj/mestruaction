@@ -1,7 +1,8 @@
 import Kontribusi from '../components/Kontribusi.jsx'
 
 import { MdArrowBackIos } from 'react-icons/md'
-import map from '../assets/map.webp'
+
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
@@ -29,7 +30,7 @@ function Kolaborasi() {
             {/* back */}
             <div className=' h-10 w-full flex items-center space-x-[16px] mb-7 pr-6 pl-3'
                 onClick={() => navigate('../')}>
-                <MdArrowBackIos size={30} />
+                <MdArrowBackIos size={30} className="cursor-pointer" />
             </div>
 
 
@@ -37,7 +38,17 @@ function Kolaborasi() {
             <div className='px-6 w-full'>
 
                 <div className='w-full h-[180px] rounded-md'>
-                    <img src={map} alt="" className='h-full w-full object-cover rounded-lg' />
+                <MapContainer className='w-full h-full rounded-md' center={[-7.6878285, 110.4132472]} zoom={14} scrollWheelZoom={false}>
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={[-7.6878285, 110.4132472]}>
+                        <Popup>
+                          SRIKANDI X UII
+                        </Popup>
+                    </Marker>
+                    </MapContainer>
                 </div>
 
                 <div className=' mt-8'>

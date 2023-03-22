@@ -43,7 +43,7 @@ function Artikel() {
 
             <div className='flex flex-col space-y-4'>
                 {artikels.map(item =>
-                    <div key={item.id} className="min-h-[114px] w-full rounded-xl bg-[#FFF9FA] border-[1px] border-[#FE6A705E] flex p-4 justify-between "
+                    <div key={item.id} className="min-h-[114px] w-full rounded-xl bg-[#FFF9FA] border-[1px] border-[#FE6A705E] flex p-4 justify-between cursor-pointer "
                         onClick={() => navigate(`artikel/${item.id}`)}>
                         <div className=" w-44 h-full">
                             <h3 className="text-[14px] font-semibold">{item.title}</h3>

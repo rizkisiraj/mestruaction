@@ -10,6 +10,7 @@ import SudahDonasi from './pages/sudahDonasi';
 import Home from './pages/home';
 import Edukasi from './pages/edukasi';
 import Artikel from './pages/artikel'
+import ArtikelVideo from './pages/videoArtikel'
 import Kolaborasi from './pages/kolaborasi'
 import SudahKolaborasi from './pages/sudahKolaborasi';
 import Kontribusi from './pages/kontribusi'
@@ -27,7 +28,8 @@ function App() {
         <Route path='sudah-donasi' element={<SudahDonasi />} />
         <Route index element={<Home />} /> 
         <Route path='edukasi/' element={<Edukasi />} /> 
-        <Route path='edukasi/artikel/:id' component={Artikel} element={<Artikel />} /> 
+        <Route path='edukasi/artikel/:id' component={Artikel} element={<Artikel />} />
+        <Route path='edukasi/artikelVideo/:id' component={ArtikelVideo} element={<ArtikelVideo />} /> 
         <Route path='kolaborasi/' element={<Kolaborasi />} />
         <Route path='sudah-kolaborasi' element={<SudahKolaborasi />} /> 
         <Route path='kontribusi/' element={<Kontribusi />} /> 

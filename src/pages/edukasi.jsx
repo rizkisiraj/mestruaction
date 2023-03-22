@@ -13,7 +13,7 @@ function Edukasi(){
             
             {/* search */}
             <div className=' h-10 w-full flex items-center space-x-[16px] mb-7 pr-6 pl-3'>
-                <MdArrowBackIos size={35} onClick={() => navigate('../')}/>
+                <MdArrowBackIos size={35} onClick={() => navigate('../')} className=" cursor-pointer"/>
                 <form className='h-full w-full border-[2px] border-gray-400 rounded-md flex items-center space-x-[8px] px-3'>
                         <FaSearch size={15} style={{ color: 'gray' }} />
                         <input className='text-gray-400 font-semibold text-[12px] focus:outline-none'
