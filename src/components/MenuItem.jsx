@@ -25,7 +25,7 @@ function Menu(){
             </div>
 
             <div className="block w-[77px] text-center">
-                <Link className="h-[50px] w-[50px] rounded-full bg-[#FFEADF] mx-auto flex mb-2">
+                <Link className="h-[50px] w-[50px] rounded-full bg-[#FFEADF] mx-auto flex mb-2" to="ajukanDonasi">
                     <FaHandPaper size={20} className=' m-auto' style={{ color: '#F64A4A' }} />
                 </Link>
                 <span className=''>Ajukan Donasi</span>
