@@ -32,6 +32,7 @@ export const getDonation = async (id) => {
   }
 }
 
+
 export const getDonors = async (id) => {
   const donorsCollection = query(collection(db, 'donations', id, 'donors'));
   const snapshot = await getDocs(donorsCollection);
@@ -61,4 +62,35 @@ export const updateTotalDonation = async (id, totalDonation) => {
   } catch(e) {
     console.log(e);
   }
+}
+
+
+export const getArtikel = async () => {
+  const artikelCollection = query(collection(db, 'artikel'));
+  const snapshot = await getDocs(artikelCollection);
+  return snapshot;
+}
+
+export const getContentArtikel = async (id) => {
+  const docContent = doc(db, 'artikel', id);
+  const docSnap = await getDoc(docContent);
+  return docSnap.data();
+}
+
+export const getKontribusi = async () => {
+  const kontribusiCollection = query(collection(db, 'kontribusi'));
+  const snapshot = await getDocs(kontribusiCollection);
+  return snapshot;
+}
+
+export const getVideo = async () => {
+  const videoCollection = query(collection(db, 'video'));
+  const snapshot = await getDocs(videoCollection);
+  return snapshot;
+}
+
+export const getContentVideo = async (id) => {
+  const docContent = doc(db, 'video', id);
+  const docSnap = await getDoc(docContent);
+  return docSnap.data();
 }
