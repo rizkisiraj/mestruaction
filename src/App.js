@@ -14,6 +14,7 @@ import ArtikelVideo from './pages/videoArtikel'
 import Kolaborasi from './pages/kolaborasi'
 import SudahKolaborasi from './pages/sudahKolaborasi';
 import Kontribusi from './pages/kontribusi'
+import AjukanDonasi from './pages/ajukanDonasi';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='kolaborasi/' element={<Kolaborasi />} />
         <Route path='sudah-kolaborasi' element={<SudahKolaborasi />} /> 
         <Route path='kontribusi/' element={<Kontribusi />} /> 
+        <Route path='ajukanDonasi' element={<AjukanDonasi />} />
       </Route>
     </Routes>
   );

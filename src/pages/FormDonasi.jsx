@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import Donations from "../dumpData";
 import { BsPlusLg } from "react-icons/bs";
 import { AiOutlineMinus } from "react-icons/ai"
-import { MdKeyboardArrowDown } from 'react-icons/md'
-import Modal from "../components/Modal";
 import { useNavigate, useParams } from "react-router-dom";
 import { addDonor, getDonation } from "../utils/firebase";
+import axios from 'axios';
 
 const convertToRupiah = (number) => {
   return 'Rp' + new Intl.NumberFormat("id-ID", {
@@ -33,9 +31,7 @@ const HARGA_KONSTAN = {
 const FormDonasi = () => {
   const { id } = useParams();
   const { register, setValue, watch, handleSubmit, resetField, setError, formState: { errors } } = useForm();
-  const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setChecked] = useState(false);
-  const navigate = useNavigate();
   const [donation, setDonation] = useState({});
 
   useEffect(() => {
@@ -45,19 +41,21 @@ const FormDonasi = () => {
     }
 
     getDataDonation();
-  },[id])
+  },[id]);
+
 
   const onSubmit = async (data, e) => {
     if((!data.banyakObat & !data.banyakPembalut & !data.banyakMenstrual)) {
       alert('Jumlah donasi minimal 1 item');
       return;
     }
+    console.log(data);
     
     const totalDonasi = data.banyakObat * HARGA_KONSTAN.obat + data.banyakMenstrual * HARGA_KONSTAN.menstrualCup + data.banyakPembalut * HARGA_KONSTAN.pembalut;
     
     const donorObj = {
       name: data.namaDonatur ? data.namaDonatur : 'Anonymous',
-      email: data.emailDonatur ? data.emailDonatur : '',
+      email: data.emailDonatur || '',
       totalDonation: totalDonasi,
       pembalut: data.banyakPembalut,
       obat: data.banyakObat,
@@ -66,8 +64,26 @@ const FormDonasi = () => {
     }
 
     if(id) {
-      await addDonor(id, donorObj, donation.progressFund+totalDonasi);
-      navigate('/sudah-donasi');
+      try {
+        const response = await axios.post('https://backend-menstruaction-production.up.railway.app/api', {
+          "transaction_details": {
+            "order_id": "test"+ new Date().getTime(),
+            "gross_amount": totalDonasi+data.totalDonasiMenstruaction,
+        }, "credit_card":{
+            "secure" : true
+        }, "customer_details": {
+          "first_name": "budi",
+          "last_name": "pratama",
+          "email": "sijarawoods@gmail.com",
+          "phone": "081279093735"
+      }
+        });
+        window.location.href = response.data.redirect_url;
+        await addDonor(id, donorObj, donation.progressFund+totalDonasi);
+      } catch (e) {
+        console.log(e);
+      }
+      // navigate('/sudah-donasi');
     }
 
 
@@ -173,12 +189,8 @@ lebih banyak orang.</p>
         </div>
       </section>
       <section>
-        <div className="w-full relative font-semibold rounded-[8px] overflow-hidden text-sm bg-[#F9FAFB] border border-[#D1D5DB] mb-[14px]">
-          <span className="absolute right-3 top-[14px]"><MdKeyboardArrowDown /></span>
-          <input onClick={() => setIsOpen(true)} {...register('metodePembayaran',{required: true})} placeholder="Metode Pembayaran" readOnly className="focus:outline-none block p-3 bg-[#F9FAFB] overflow-hidden w-full cursor-pointer text-sm font-medium" type="text" name="metodePembayaran" />
-        </div>
-        <input {...register('namaDonatur',{ required: isChecked ? false : true })} disabled={isChecked} placeholder="Nama" type="text" name="namaDonatur" className="text-sm mb-[14px] block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
-        <input {...register('emailDonatur',{ required: isChecked ? false : true })} disabled={isChecked} placeholder="Email" type="text" name="emailDonatur" className="text-sm block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB]" />
+        <input {...register('namaDonatur',{ required: isChecked ? false : true })} disabled={isChecked} placeholder="Nama" type="text" name="namaDonatur" className="text-sm mb-[14px] block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB] disabled:bg-slate-300" />
+        <input {...register('emailDonatur',{ required: true })} placeholder="Email" type="text" name="emailDonatur" className="text-sm block w-full p-3 rounded-[8px] bg-[#F9FAFB] border border-[#D1D5DB] focus:border-slate-800" />
         <div className="flex items-center gap-1 mt-[19px] mb-[30px]">
           <input className="inline-block" type="checkbox" id="rahasiakan" name="rahasiakan" checked={isChecked} onChange={() => {
             setChecked(!isChecked)
@@ -213,10 +225,6 @@ lebih banyak orang.</p>
           <p className="flex-1">Tip Menstruaction</p>
           <p className="flex-1 text-right">{convertToRupiah(watch('totalDonasiMenstruaction',0))}</p>
         </div>
-        <div className="flex text-xs font-medium">
-          <p className="flex-1">Metode Pembayaran</p>
-          <p className="flex-1 text-right">{watch('metodePembayaran')}</p>
-        </div>
       </section>
       <section className="flex justify-between">
         <div>
@@ -229,7 +237,6 @@ lebih banyak orang.</p>
       </section>
       </form>
     </main>
-    <Modal isOpen={isOpen} watch={watch} setValues={setValue} setIsOpen={setIsOpen} rekening={donation.rekeningBank && donation.rekeningBank} uangDigital={donation.uangDigital && donation.uangDigital} namaAkun={donation.namaAkun && donation.namaAkun} />
     </>
   )
 }
