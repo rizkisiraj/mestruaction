@@ -2,12 +2,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 import { getVideo } from '../utils/firebase';
 
-import SampleVid from '../assets/video.webp'
 import { BsFillCaretRightFill } from 'react-icons/bs'
 
 const convertSnapshotToArray = (snapshot) => {
@@ -23,9 +22,7 @@ const convertSnapshotToArray = (snapshot) => {
     return arrayDump;
 }
 
-function Video() {
-
-    const navigate = useNavigate();
+function Video(props) {
     const [video, setVideo] = useState([])
 
     useEffect(() => {
@@ -39,6 +36,8 @@ function Video() {
         getData();
     }, [])
 
+    const items = (video.filter(art => art.Title.toLocaleLowerCase().includes(props.searchItem)));
+
     return (
         <div className=" w-full h-auto my-6 pl-6">
             <div className="flex justify-between font-semibold items-center pr-6">
@@ -49,18 +48,28 @@ function Video() {
                     spaceBetween={15}
                     slidesPerView={1.2}
                 >
-                    {video.map(item =>
-                        <SwiperSlide>
-                            <div className='w-full h-full relative'>
-                                <img src={item.Gambar} alt="" className='w-full h-full object-cover rounded-lg' />
-                                <Link className="absolute flex inset-0 bg-gradient-to-b  to-[#9B1C1C] via-black/20 from-black/5 bg-cover rounded-xl items-end"
-                                    to={`artikelVideo/${item.id}`} >
-                                    <BsFillCaretRightFill size={40} className='absolute inset-0 text-white top-14 mx-auto' />
-                                    <h2 className='text-[14px] font-semibold text-white inset-0 px-3 mb-5'>{item.Title}</h2>
-                                </Link>
-                            </div>
-                        </SwiperSlide>
-                    )}
+                    {
+                        items.length ?
+                            items.map((item) => {
+                                return (
+                                    <SwiperSlide key={item.id}>
+                                        <div className='w-full h-full relative'>
+                                            <img src={item.Gambar} alt="" className='w-full h-full object-cover rounded-lg' />
+                                            <Link className="absolute flex inset-0 bg-gradient-to-b  to-[#9B1C1C] via-black/20 from-black/5 bg-cover rounded-xl items-end"
+                                                to={`artikelVideo/${item.id}`} >
+                                                <BsFillCaretRightFill size={40} className='absolute inset-0 text-white top-14 mx-auto' />
+                                                <h2 className='text-[14px] font-semibold text-white inset-0 px-3 mb-5'>{item.Title}</h2>
+                                            </Link>
+                                        </div>
+                                    </SwiperSlide>
+                                )
+                            }) :
+                            <SwiperSlide>
+                                <div className="h-full w-full text-sm text-center mt-7">
+                                    <h2>Video Tidak Ditemukan</h2>
+                                </div>
+                            </SwiperSlide>
+                    }
 
                 </Swiper>
             </div>
