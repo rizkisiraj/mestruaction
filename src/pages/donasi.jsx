@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { MdArrowBackIos } from 'react-icons/md';
 import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import BackgroundDonasi from '../assets/background-donasi.webp';
 import IconCreator from '../assets/icon-creator.svg';
@@ -49,7 +50,12 @@ const Donasi = () => {
 
   return (
     <>
-    <img height={224} src={BackgroundDonasi} className="block w-full" alt="background donasi" />
+    <header className='h-[224px] pt-4 pl-6 relative'>
+      <img height={224} src={BackgroundDonasi} className="block w-full absolute top-0 left-0" alt="background donasi" />
+      <button aria-label='back button'>
+        <MdArrowBackIos size={35} onClick={() => navigate('../')} className="z-[9999] block cursor-pointer absolute"/>
+      </button>
+    </header>
     <main className='px-8 pt-5'>
       <section>
         <h1 className='text-sm font-bold mb-3'>{data.title && data.title}</h1>
