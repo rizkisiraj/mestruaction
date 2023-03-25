@@ -1,30 +1,46 @@
+import { useState } from "react";
+import { MdArrowBackIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import AjukanDonasiHeader from "../components/AjukanDonasiHeader";
+import FormAjukanDonasi from "../components/FormAjukanDonasi";
+
+const initialDonasi = {
+  targetBantuan: '',
+  lokasi: '',
+  permasalahan: '',
+  namaLengkap: '',
+  emailPribadi: '',
+  nomorPonsel: '',
+  pekerjaanSaatIni: '',
+  namaInstansi: '',
+}
+
 const AjukanDonasi = () => {
+    const [isNextPage, setNextPage] = useState(false);
+    const fieldAjukanDonasi = useState(initialDonasi);
+    const navigate = useNavigate();
+
     return (
-        <section className="w-full pt-10">
+        <section className="w-full py-8">
+          <button onClick={() => navigate('../')} aria-label="back button" className="ml-4 cursor-pointer">
+            <MdArrowBackIos size={35}/>
+          </button>
           <aside className="w-full bg-[#f5f5f5] h-auto overflow-x-hidden">
-            <section className="pl-4 w-[500px] py-[13px] h-full flex items-center">
-              <div className="flex items-center">
-                <div className="rounded-full bg-red-500 h-[31px] w-[31px] text-center py-1 mr-2 border border-red-500">
-                    <span className="text-base text-white">1</span>
-                </div>
-                <p className="text-red-500">Tujuan</p>
-              </div>
-              <div className="bg-[#C4C4C4] w-[39px] h-[3px] mx-4" />
-              <div className="flex items-center">
-                <div className="rounded-full bg-transparent h-[31px] w-[31px] text-center py-1 mr-2 border border-[#c4c4c4]">
-                    <span className="text-base text-[#c4c4c4]">2</span>
-                </div>
-                <p className="text-[#c4c4c4]">Data diri</p>
-              </div>
-              <div className="bg-[#C4C4C4] w-[39px] h-[3px] mx-4" />
-              <div className="flex items-center">
-                <div className="rounded-full bg-transparent h-[31px] w-[31px] text-center py-1 mr-2 border border-[#c4c4c4]">
-                    <span className="text-base text-[#c4c4c4]">3</span>
-                </div>
-                <p className="text-[#c4c4c4]">Verifikasi</p>
-              </div>
-            </section>
+           <AjukanDonasiHeader isNextPage={isNextPage} />
           </aside>
+          <section className="px-6 pt-5 min-h-[80vh] flex flex-col">
+            {
+              !isNextPage && 
+              <div className="mb-6">
+              <h1 className="text-lg font-bold">Hai, #TemanAksi!</h1>
+              <p className="font-semibold">Kamu mau ajukan bantuan untuk...</p>
+              </div>
+            }
+            <form  className=" flex-1 relative">
+              <FormAjukanDonasi fieldDonasi={fieldAjukanDonasi} setNextPage={setNextPage} isNextPage={isNextPage} />
+            </form>
+          </section>
+          
         </section>
     )
 }
