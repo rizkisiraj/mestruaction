@@ -46,7 +46,7 @@ function Video(props) {
             <div className="h-[170px] w-full flex my-[10px]">
                 <Swiper
                     spaceBetween={15}
-                    slidesPerView={1.2}
+                    slidesPerView={items.length <= 1 ? 1 : 1.2}
                 >
                     {
                         items.length ?
