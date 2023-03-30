@@ -52,15 +52,17 @@ const FormDonasi = () => {
     console.log(data);
     
     const totalDonasi = data.banyakObat * HARGA_KONSTAN.obat + data.banyakMenstrual * HARGA_KONSTAN.menstrualCup + data.banyakPembalut * HARGA_KONSTAN.pembalut;
-    
+    const orderId = "test"+ new Date().getTime();
+
     const donorObj = {
       name: data.namaDonatur ? data.namaDonatur : 'Anonymous',
-      email: data.emailDonatur || '',
+      email: data.emailDonatur,
       totalDonation: totalDonasi,
       pembalut: data.banyakPembalut,
       obat: data.banyakObat,
       menstrualCup: data.banyakMenstrual,
-      metodePembayaran: data.metodePembayaran,
+      isDonated: false,
+      order_id: orderId,
     }
 
     if(id) {
@@ -72,18 +74,17 @@ const FormDonasi = () => {
         }, "credit_card":{
             "secure" : true
         }, "customer_details": {
-          "first_name": "budi",
-          "last_name": "pratama",
-          "email": "sijarawoods@gmail.com",
-          "phone": "081279093735"
+          "first_name": data.namaDonatur,
+          "last_name": "",
+          "email": data.emailDonatur,
       }
         });
+        await addDonor(id, donorObj);
         window.location.href = response.data.redirect_url;
-        await addDonor(id, donorObj, donation.progressFund+totalDonasi);
       } catch (e) {
         console.log(e);
       }
-      // navigate('/sudah-donasi');
+      
     }
 
 

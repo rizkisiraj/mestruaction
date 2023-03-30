@@ -39,14 +39,12 @@ export const getDonors = async (id) => {
   return snapshot;
 }
 
-export const addDonor = async (id, donor, donasiUpdate) => {
+export const addDonor = async (id, donor) => {
   try {
       await addDoc(collection(db,'donations',id,'donors'), {
       ...donor,
       created_at: Timestamp.now(),
     });
-
-    await updateTotalDonation(id, donasiUpdate);
 
   } catch(e) {
     console.log(e);

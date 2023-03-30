@@ -17,8 +17,27 @@ const initialDonasi = {
 
 const AjukanDonasi = () => {
     const [isNextPage, setNextPage] = useState(false);
-    const fieldAjukanDonasi = useState(initialDonasi);
+    const [fieldAjukanDonasi, setFieldAjukanDonasi] = useState(initialDonasi);
     const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+
+      if( !fieldAjukanDonasi.targetBantuan || !fieldAjukanDonasi.lokasi || !fieldAjukanDonasi.permasalahan ) {
+        setNextPage(false);
+        return;
+      } else if ( !fieldAjukanDonasi.namaLengkap || !fieldAjukanDonasi.emailPribadi || !fieldAjukanDonasi.nomorPonsel || !fieldAjukanDonasi.pekerjaanSaatIni || !fieldAjukanDonasi.namaInstansi ) {
+        return;
+      }
+
+      window.location.href = `mailto:21523224@students.uii.ac.id?subject=Pengajuan Donasi Menstruaction&body=Salam Admin Menstruaction,Saya ${fieldAjukanDonasi.namaLengkap} selaku ${fieldAjukanDonasi.pekerjaanSaatIni} dari ${fieldAjukanDonasi.namaInstansi}, ingin mengajukan donasi dengan detail sebagai berikut : %0D%0A
+      Target Bantuan : ${fieldAjukanDonasi.targetBantuan} %0D%0A
+      Lokasi : ${fieldAjukanDonasi.lokasi} %0D%0A
+      Permasalahan : ${fieldAjukanDonasi.permasalahan} %0D%0A
+      Besar harapan saya agar Anda menerima pengajuan bantuan dari saya ini. Untuk detail selanjutnya Anda bisa menghubungi ${!fieldAjukanDonasi.nomorPonsel} %0D%0A
+      Terima Kasih
+      `;
+    }
 
     return (
         <section className="w-full py-8">
@@ -36,11 +55,10 @@ const AjukanDonasi = () => {
               <p className="font-semibold">Kamu mau ajukan bantuan untuk...</p>
               </div>
             }
-            <form  className=" flex-1 relative">
-              <FormAjukanDonasi fieldDonasi={fieldAjukanDonasi} setNextPage={setNextPage} isNextPage={isNextPage} />
+            <form onSubmit={handleSubmit} className="flex-1 relative">
+              <FormAjukanDonasi fieldDonasi={fieldAjukanDonasi} setNextPage={setNextPage} isNextPage={isNextPage} setFieldAjukanDonasi={setFieldAjukanDonasi} />
             </form>
           </section>
-          
         </section>
     )
 }
