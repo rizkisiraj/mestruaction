@@ -95,8 +95,8 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 * [![React][React.js]][React-url]
 * [![Firebase][Firebase.com]][firebase-url]
-* [![Spreadsheet][google-spreadsheet]][]
-* [![PWA][pwa-logo]][]
+* Google Spreadsheet
+* Progressive Web App
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -194,7 +194,7 @@ Project Link: [Menstruaction](https://menstruaction.gdscuii.id)
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com
-[Firebase.com]: https://firebase.google.com/static/downloads/brand-guidelines/PNG/logo-built_white.png
+[Firebase.com]: https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white
 [firebase-url]: https://firebase.google.com/
 [google-spreadsheet]: https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Google_Sheets_logo_%282014-2020%29.svg/1498px-Google_Sheets_logo_%282014-2020%29.svg.png
 [pwa-logo]: https://user-images.githubusercontent.com/3104648/28351989-7f68389e-6c4b-11e7-9bf2-e9fcd4977e7a.png
